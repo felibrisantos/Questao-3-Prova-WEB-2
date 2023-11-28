@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="/styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <h1>Lista de Usuários</h1>
+    <ul>
+      <% usuarios.forEach(usuario => { %>
+      <li>
+        <a href="/usuarios/<%= usuario.id %>"><%= usuario.nome %></a>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

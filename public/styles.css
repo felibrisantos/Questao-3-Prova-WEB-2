@@ -1,0 +1,77 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eeeeee;
+}
+
+h1 {
+  background-color: #222831;
+  color: #eeeeee;
+  padding: 20px 0;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  background-color: #00adb5;
+  margin: 15px auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+li:hover {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+li a {
+  text-decoration: none;
+  color: #222831;
+  transition: color 0.3s ease;
+}
+
+li a:hover {
+  color: #eeeeee;
+}
+
+.user-container {
+  background-color: #fff;
+  margin: 15px auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+p {
+  background-color: #00adb5;
+  margin: 15px auto;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:active,
+.btn:focus {
+  background-color: #0056b3;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
