@@ -29,7 +29,7 @@ npm install
 Para executar o projeto, use o comando:
 
 ```bash
-   node app.js
+node app.js
 ```
 
 Isso irá iniciar o servidor na porta 3000. Você pode acessar a aplicação pelo navegador em http://localhost:3000.
