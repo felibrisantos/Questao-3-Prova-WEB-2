@@ -1,20 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path"); // Importe o módulo path
+const path = require("path");
 const app = express();
 const port = 3000;
 
-// Configuração para usar o body-parser para interpretar JSON
 app.use(bodyParser.json());
 
-// Configuração do mecanismo de visualização EJS e diretório de views
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Configuração para servir arquivos estáticos (CSS, imagens, etc.)
 app.use(express.static("public"));
 
-// Simulação de dados
 let usuarios = [
   {
     id: 1,
@@ -24,56 +20,84 @@ let usuarios = [
   },
 ];
 
-// Rota para exibir a página inicial
 app.get("/", (req, res) => {
-  res.render("index");
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
+
+  if (isCurlRequest) {
+    res.json({ message: "Bem-vindo à API de Usuários!" });
+  } else {
+    res.render("index");
+  }
 });
 
-// Rota para obter todos os usuários
 app.get("/usuarios", (req, res) => {
-  res.render("usuarios", { usuarios });
-});
-7;
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
 
-// Rota para obter um usuário pelo ID
+  if (isCurlRequest) {
+    res.json({ usuarios });
+  } else {
+    res.render("usuarios", { usuarios });
+  }
+});
+
 app.get("/usuarios/:id", (req, res) => {
   const usuario = usuarios.find((u) => u.id === parseInt(req.params.id));
   if (!usuario)
     return res.status(404).json({ error: "Usuário não encontrado" });
-  res.render("usuario", { usuario });
+
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
+
+  if (isCurlRequest) {
+    res.json({ usuario });
+  } else {
+    res.render("usuario", { usuario });
+  }
 });
 
-// Rota para exibir o formulário de criação de usuário
-app.get("/usuarios/novo", (req, res) => {
-  res.render("form");
-});
-
-// Rota para criar um novo usuário
 app.post("/usuarios", (req, res) => {
   const novoUsuario = req.body;
+  novoUsuario.id = usuarios.length + 1;
   usuarios.push(novoUsuario);
-  res.status(201).json(novoUsuario);
+
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
+
+  if (isCurlRequest) {
+    res
+      .status(201)
+      .json({ message: "Usuário criado com sucesso", usuario: novoUsuario });
+  } else {
+    res.redirect("/usuarios");
+  }
 });
 
-// Rota para atualizar um usuário pelo ID
 app.patch("/usuarios/:id", (req, res) => {
   const usuario = usuarios.find((u) => u.id === parseInt(req.params.id));
   if (!usuario)
     return res.status(404).json({ error: "Usuário não encontrado" });
 
-  // Atualiza apenas os campos fornecidos no corpo da solicitação
   Object.assign(usuario, req.body);
 
-  res.json(usuario);
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
+
+  if (isCurlRequest) {
+    res.json({ usuario });
+  } else {
+    res.redirect("/usuarios/" + usuario.id);
+  }
 });
 
-// Rota para excluir um usuário pelo ID
 app.delete("/usuarios/:id", (req, res) => {
   usuarios = usuarios.filter((u) => u.id !== parseInt(req.params.id));
-  res.json({ message: "Usuário removido com sucesso" });
+
+  const isCurlRequest = req.get("User-Agent").startsWith("curl");
+
+  if (isCurlRequest) {
+    res.json({ message: "Usuário removido com sucesso" });
+  } else {
+    res.redirect("/usuarios");
+  }
 });
 
-// Inicia o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
