@@ -1,4 +1,4 @@
-# Questao-3-Prova-WEB-2
+# Questão 3 da prova de WEB
 
 # API de Usuários
 
@@ -17,23 +17,65 @@ Para instalar o projeto, você precisa ter o [Node.js] e o [npm] instalados na s
 
 ```bash
 git clone https://github.com/seu-usuario/api-usuarios.git
+```
 
 Depois, entre na pasta do projeto e instale as dependências usando o comando:
 
+```bash
 npm install
+```
 
-Uso
+## Uso
 Para executar o projeto, use o comando:
 
-npm start
+```bash
+   node app.js
+```
 
 Isso irá iniciar o servidor na porta 3000. Você pode acessar a aplicação pelo navegador em http://localhost:3000.
 
-A aplicação possui as seguintes rotas:
+## Operações CRUD
 
-GET /: exibe uma página inicial com uma mensagem de boas-vindas. Se a requisição for feita pelo comando curl, retorna um objeto JSON com a mesma mensagem.
-GET /usuarios: exibe uma página com a lista de todos os usuários cadastrados. Se a requisição for feita pelo comando curl, retorna um array JSON com os mesmos usuários.
-GET /usuarios/:id: exibe uma página com os detalhes de um usuário específico, dado o seu id. Se a requisição for feita pelo comando curl, retorna um objeto JSON com o mesmo usuário. Se o id não corresponder a nenhum usuário, retorna um erro 404.
-POST /usuarios: cria um novo usuário com os dados enviados no corpo da requisição. O usuário deve ter os campos nome, email e data_nascimento. Se a requisição for feita pelo comando curl, retorna um objeto JSON com uma mensagem de sucesso e o usuário criado. Se a requisição for feita pelo navegador, redireciona para a rota /usuarios.
-PATCH /usuarios/:id: atualiza um usuário existente com os dados enviados no corpo da requisição. O usuário deve ter os campos nome, email e data_nascimento. Se a requisição for feita pelo comando curl, retorna um objeto JSON com o usuário atualizado. Se a requisição for feita pelo navegador, redireciona para a rota /usuarios/:id. Se o id não corresponder a nenhum usuário, retorna um erro 404.
-DELETE /usuarios/:id: remove um usuário existente, dado o seu id. Se a requisição for feita pelo comando curl, retorna um objeto JSON com uma mensagem de sucesso. Se a requisição for feita pelo navegador, redireciona para a rota /usuarios. Se o id não corresponder a nenhum usuário, retorna um erro 404.
+Para realizar as operações CRUD, você pode utilizar o seguinte comando no terminal Bash:
+
+```bash
+curl -X <método> -H "Content-Type: application/json" -d '{<dados>}' http://localhost:<porta>/alunos
+```
+Aqui está o significado de cada parte do comando:
+
+- `<método>`: O método HTTP que você deseja executar (POST, GET, PUT ou DELETE).
+- `<dados>`: O corpo da solicitação no formato JSON.
+- `<porta>`: A porta em que o servidor está sendo executado (normalmente 3000)
+Por exemplo, para obter a lista de todos os usuários, você pode usar o seguinte comando:
+
+```bash
+curl http://localhost:3000/usuarios
+```
+Isso irá retornar um array JSON com os usuários cadastrados. 
+
+Para obter os detalhes de um usuário específico, você pode usar o seguinte comando, substituindo o id pelo valor desejado:
+```bash
+curl http://localhost:3000/usuarios/1
+```
+Isso irá retornar um objeto JSON com o usuário correspondente ao id informado. 
+
+Para criar um novo usuário, você pode usar o seguinte comando, substituindo os dados pelo valor desejado:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"nome": "Novo Usuário", "email": "novo@exemplo.com", "data_nascimento": "2001-01-01"}' http://localhost:3000/usuarios
+```
+Isso irá retornar um objeto JSON com uma mensagem de sucesso e o usuário criado. 
+
+Para atualizar um usuário existente, você pode usar o seguinte comando, substituindo o id e os dados pelo valor desejado:
+```bash
+curl -X PATCH -H "Content-Type: application/json" -d '{"nome": "Usuário Atualizado", "email": "atualizado@exemplo.com", "data_nascimento": "2002-02-02"}' http://localhost:3000/usuarios/1
+```
+Isso irá retornar um objeto JSON com o usuário atualizado. 
+
+Para remover um usuário existente, você pode usar o seguinte comando, substituindo o id pelo valor desejado:
+```bash
+curl -X DELETE http://localhost:3000/usuarios/1
+```
+
+## Autor
+
+Felipe Brigagão Santos
